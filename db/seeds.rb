@@ -8,6 +8,8 @@
 
 require 'faker'
 
+Student.destroy_all
+
 def generate_uni_levels
   generate_random_number = Faker::Number.between(from: 1, to: 5)
   num_by_100 = generate_random_number * 100
@@ -43,7 +45,8 @@ random_index_lgas = rand(lgas.length)
     age: Faker::Number.between(from: 18, to: 22),
     bio: Faker::Lorem.paragraph,
     lga_of_origin: lgas[random_index_lgas],
-    phone_number: Faker::PhoneNumber.phone_number
+    phone_number: Faker::PhoneNumber.phone_number,
+    photo: Faker::Avatar.image
   )
 end
 

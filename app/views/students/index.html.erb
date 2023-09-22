@@ -2,12 +2,9 @@
 
 <h1>Students</h1>
 
-<div id="students">
+<div id="students" class="grid">
   <% @students.each do |student| %>
     <%= render student %>
-    <p>
-      <%= link_to "Show this student", student %>
-    </p>
   <% end %>
 </div>
 

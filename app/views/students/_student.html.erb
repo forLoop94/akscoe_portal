@@ -1,8 +1,19 @@
 <div id="<%= dom_id student %>">
-  <%= student.name%><br>
-  <%= student.age%><br>
-  <%= student.department%><br>
-  <%= student.phone_number%><br>
-  <%= student.lga_of_origin%><br>
-  <%= student.bio%>
+  <div class="card" style="width: 18rem;">
+    <img src="<%= student.photo %>" class="card-img-top, passport" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= student.name %></h5>
+      <p class="card-text"><%= student.bio %></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><%= student.gender %></li>
+      <li class="list-group-item"><%= student.department %></li>
+      <li class="list-group-item"><%= student.phone_number %></li>
+      <li class="list-group-item"><%= student.lga_of_origin %></li>
+    </ul>
+    <div class="card-body">
+      <%= link_to "Show this student", student %>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
 </div>
