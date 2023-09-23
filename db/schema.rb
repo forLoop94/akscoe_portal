@@ -10,22 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_22_214407) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_23_224803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.integer "level"
-    t.string "gender"
-    t.string "department"
-    t.integer "age"
-    t.text "bio"
-    t.string "lga_of_origin"
+  create_table "courses", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "code", null: false
+    t.integer "level", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "phone_number"
-    t.string "photo"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "level", null: false
+    t.string "gender", null: false
+    t.string "department", null: false
+    t.integer "age", null: false
+    t.text "bio"
+    t.string "lga_of_origin", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "phone_number", null: false
+    t.string "photo", null: false
   end
 
 end
