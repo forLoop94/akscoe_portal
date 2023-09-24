@@ -1,14 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
 require 'faker'
 
 Student.destroy_all
+Course.destroy_all
 
 def generate_uni_levels
   generate_random_number = Faker::Number.between(from: 1, to: 5)
@@ -30,13 +23,16 @@ def random_genders
 end
 
 departments = %i[Civil_Eng Mechanical_Eng Electrical_Eng Computer_Science Medicine Nursing Law]
-random_index_depts = rand(departments.length)
 
 lgas = %i[uyo, nsit_ubium, nsit_ibom, Okobo, Obot-akara, Itu, Ini, Eket, Ibeno, Etinan, Onna]
-random_index_lgas = rand(lgas.length)
+
+courses = %i[Engineers_in_society hydraulic_eng medical_sciences midwivery civil_law thermodynamics heat web_development]
 
 
 10.times do
+  random_index_depts = rand(departments.length)
+  random_index_lgas = rand(lgas.length)
+
   Student.create(
     name: Faker::Name.name,
     level: generate_uni_levels,
@@ -50,4 +46,21 @@ random_index_lgas = rand(lgas.length)
   )
 end
 
-puts "#{Student.count} students created"
+30.times do
+  random_index_courses = rand(courses.length)
+
+  Course.create(
+    title: courses[random_index_courses],
+    code: Faker::Number.unique.number(digits: 3),
+    level: generate_uni_levels
+  )
+end
+
+50.times do
+  StudentCourse.create(
+    student_id: Student.all.sample.id,
+    course_id: Course.all.sample.id
+  )
+end
+
+puts "#{Student.count} students created\n #{Course.count} courses created\n #{StudentCourse.count} student courses created"
