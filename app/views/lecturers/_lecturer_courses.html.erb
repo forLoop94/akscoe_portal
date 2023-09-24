@@ -1,4 +1,5 @@
 <% @lecturer_courses.each do |course| %>
   <%= course.title %>
-  <%= course.code %><br>
+  <%= course.code %>
+  <%= link_to "See students", course_path(course.id)%><br>
 <% end %>

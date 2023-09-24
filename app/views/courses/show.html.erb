@@ -1,6 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @course %>
+<h1>List of students offering <%= @course.title.upcase %></h1>
+
+<%= render 'course_students' %>
 
 <div>
   <%= link_to "Edit this course", edit_course_path(@course) %> |
