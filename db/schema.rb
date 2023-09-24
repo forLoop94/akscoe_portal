@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_24_124253) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_24_124325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_124253) do
     t.string "title", null: false
     t.integer "code", null: false
     t.integer "level", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lecturer_courses", force: :cascade do |t|
+    t.bigint "lecturer_id"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_lecturer_courses_on_course_id"
+    t.index ["lecturer_id"], name: "index_lecturer_courses_on_lecturer_id"
+  end
+
+  create_table "lecturers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "photo", null: false
+    t.string "rank", null: false
+    t.text "bio", null: false
+    t.string "department", null: false
+    t.integer "age", null: false
+    t.integer "phone_number", null: false
+    t.string "lga_of_origin", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -45,6 +67,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_124253) do
     t.string "photo", null: false
   end
 
+  add_foreign_key "lecturer_courses", "courses"
+  add_foreign_key "lecturer_courses", "lecturers"
   add_foreign_key "student_courses", "courses"
   add_foreign_key "student_courses", "students"
 end
