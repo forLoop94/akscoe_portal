@@ -1,6 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @student %>
+<h1><%= @student.name %>'s courses</h1>
+
+<p>Below are all the courses you are offering</p>
+
+<%= render 'student_courses' %>
 
 <div>
   <%= link_to "Edit this student", edit_student_path(@student) %> |
