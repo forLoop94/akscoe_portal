@@ -6,6 +6,8 @@
 
 <%= render 'student_courses' %>
 
+<%= "#{@student.name} you have no courses yet!" if @student_courses.empty?%>
+
 <div>
   <%= link_to "Edit this student", edit_student_path(@student) %> |
   <%= link_to "Back to students", students_path %>

@@ -8,6 +8,8 @@ class LecturersController < ApplicationController
 
   # GET /lecturers/1 or /lecturers/1.json
   def show
+    @lecturer = Lecturer.find(params[:id])
+    @lecturer_courses = @lecturer.courses
   end
 
   # GET /lecturers/new
