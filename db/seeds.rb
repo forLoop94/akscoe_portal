@@ -1,7 +1,10 @@
 require 'faker'
 
 Student.destroy_all
+Lecturer.destroy_all
 Course.destroy_all
+StudentCourse.destroy_all
+LecturerCourse.destroy_all
 
 def generate_uni_levels
   generate_random_number = Faker::Number.between(from: 1, to: 5)
@@ -28,8 +31,10 @@ lgas = %i[uyo, nsit_ubium, nsit_ibom, Okobo, Obot-akara, Itu, Ini, Eket, Ibeno, 
 
 courses = %i[Engineers_in_society hydraulic_eng medical_sciences midwivery civil_law thermodynamics heat web_development]
 
+ranks = %i[Lab_attendant assistant_lecturer Junior_lecturer Senior_lecturer Principal_lecturer Professor]
 
-10.times do
+
+100.times do
   random_index_depts = rand(departments.length)
   random_index_lgas = rand(lgas.length)
 
@@ -46,7 +51,25 @@ courses = %i[Engineers_in_society hydraulic_eng medical_sciences midwivery civil
   )
 end
 
-30.times do
+20.times do
+  random_index_depts = rand(departments.length)
+  random_index_lgas = rand(lgas.length)
+  random_index_ranks = rand(ranks.length)
+
+  Lecturer.create(
+    name: Faker::Name.name,
+    photo: Faker::Avatar.image,
+    rank: ranks[random_index_ranks],
+    bio: Faker::Lorem.paragraph,
+    department: departments[random_index_depts],
+    age: Faker::Number.between(from: 35, to: 70),
+    phone_number: Faker::PhoneNumber.phone_number,
+    lga_of_origin: lgas[random_index_lgas],
+    gender: random_genders
+  )
+end
+
+20.times do
   random_index_courses = rand(courses.length)
 
   Course.create(
@@ -63,4 +86,11 @@ end
   )
 end
 
-puts "#{Student.count} students created\n #{Course.count} courses created\n #{StudentCourse.count} student courses created"
+50.times do
+  LecturerCourse.create(
+    lecturer_id: Lecturer.all.sample.id,
+    course_id: Course.all.sample.id
+  )
+end
+
+puts "#{Student.count} students created\n #{Lecturer.count} lecturers created\n #{Course.count} courses created\n #{StudentCourse.count} student courses created\n #{LecturerCourse.count} lecturer courses created"
